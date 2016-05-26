@@ -45,8 +45,12 @@ checkSong = ->
     postSong(track)
 
 postSong = (track) ->
-  isBroke = false
   albumArtURL = track.albumArtURL
+
+  if albumArtURL.length && !albumArtURL.startsWith('http')
+    albumArtURL = "http://#{config.sonosIpAddress}:1400#{albumArtURL}"
+
+  isBroke = false
   lastArtist = track.artist
   lastTitle = track.title
   oneLiner = "#{track.artist} - #{track.title}"
